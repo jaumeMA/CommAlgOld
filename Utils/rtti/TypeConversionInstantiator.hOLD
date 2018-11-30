@@ -1,0 +1,389 @@
+#pragma once
+
+#include "Utils/rtti/TypeConversion.h"
+#include "YTL/container/cParameterPack.h"
+#include "Math/cPrimeNumbers.h"
+#include "YTL/mpl/cStaticCounter.h"
+
+namespace yame
+{
+namespace rtti
+{
+namespace detail
+{
+
+template<typename>
+struct __rtti_tag
+{
+    typedef void type;
+};
+
+template<typename ... Bases>
+struct _get_bases_prime_id;
+template<typename,typename>
+struct get_bases_prime_id;
+
+template<typename UnderlyingType, size_t Components>
+requires ( mpl::is_numeric<UnderlyingType>::value && mpl::is_power_of_two<Components>::value )
+struct prod_num;
+
+template<typename UnderlyingType>
+requires ( mpl::is_numeric<UnderlyingType>::value )
+struct prod_num<UnderlyingType,1>
+{
+    template<typename UUnderlyingType, size_t CComponets>
+    friend struct prod_num;
+
+public:
+    inline constexpr prod_num()
+    : m_value(static_cast<UnderlyingType>(1))
+    {
+    }
+    inline constexpr prod_num(const UnderlyingType& i_value)
+    : m_value(i_value)
+    {
+    }
+//    inline constexpr prod_num(const prod_num& other)
+//    : m_value(other.m_value)
+//    {
+//    }
+    //inline constexpr prod_num& operator=(const prod_num& other) = delete;
+    inline constexpr const UnderlyingType& get() const
+    {
+        return m_value;
+    }
+
+    friend inline constexpr prod_num max(const prod_num& i_lhs, const prod_num& i_rhs)
+    {
+        return (i_lhs.m_value > i_rhs.m_value) ? i_lhs : i_rhs;
+    }
+    friend inline constexpr prod_num min(const prod_num& i_lhs, const prod_num& i_rhs)
+    {
+        return (i_lhs.m_value <= i_rhs.m_value) ? i_lhs : i_rhs;
+    }
+    friend inline constexpr prod_num operator*(const prod_num& i_lhs, const prod_num& i_rhs)
+    {
+        return i_lhs.m_value * i_rhs.m_value;
+    }
+
+private:
+    template<int Component>
+    inline constexpr UnderlyingType inner_get() const
+    {
+        return m_value;
+    }
+
+    UnderlyingType m_value = UnderlyingType(1);
+};
+
+template<typename UnderlyingType, size_t Components>
+requires ( mpl::is_numeric<UnderlyingType>::value && mpl::is_power_of_two<Components>::value )
+struct prod_num
+{
+public:
+    inline constexpr prod_num()
+    : m_value{ 0 }
+    {
+        inner_construction(typename mpl::create_range_rank<0,Components>::type{},static_cast<UnderlyingType>(1));
+    }
+//    inline constexpr prod_num(const prod_num<UnderlyingType,Components>& other)
+//    : m_value{ 1 }
+//    {
+//        bool foo = inner_construction<Components,0>(other,typename mpl::create_range_rank<0,Components>::type{});
+//    }
+    template<typename ... Args>
+    //requires ( mpl::get_num_types<Args...>::value == Components )
+    inline constexpr prod_num(const Args& ... i_args)
+    : m_value{ 0 }
+    {
+        inner_construction(typename mpl::create_range_rank<0,Components>::type{},i_args...);
+    }
+    template<size_t ... CComponents>
+    //requires ( mpl::sum_ranks<CComponents...>::value == Components )
+    inline constexpr prod_num(const prod_num<UnderlyingType,CComponents>& ... i_subBigNums)
+    : m_value{ 0 }
+    {
+        ( inner_construction<CComponents,0>(typename mpl::create_range_rank<0,CComponents>::type{},i_subBigNums) && ... );
+    }
+    //inline constexpr prod_num& operator=(const prod_num<UnderlyingType,Components>& other) = delete;
+    inline constexpr operator UnderlyingType() const
+    {
+        return UnderlyingType(1);//inner_prod(0,typename mpl::create_range_rank<0,Components>::type{});
+    }
+    inline constexpr bool empty() const
+    {
+        return inner_empty<0>(typename mpl::create_range_rank<0,Components>::type{});
+    }
+    template<size_t Component>
+    //requires ( Component < Components )
+    const UnderlyingType& get() const
+    {
+        return m_value[Component];
+    }
+    template<size_t Component>
+    //requires ( Component< Components )
+    UnderlyingType& get()
+    {
+        return m_value[Component];
+    }
+    template<int InitComponent, int CComponents>
+    //requires ( (InitComponent + CComponents) <= Components )
+    inline constexpr prod_num<UnderlyingType,CComponents> partial() const
+    {
+        return inner_partial<CComponents>(InitComponent,typename mpl::create_range_rank<0,CComponents>::type{});
+    }
+    inline constexpr const UnderlyingType& operator[](size_t i_component) const
+    {
+        return m_value[i_component];
+    }
+    inline constexpr UnderlyingType& operator[](size_t i_component)
+    {
+        return m_value[i_component];
+    }
+
+    friend inline constexpr prod_num max(const prod_num& i_lhs, const prod_num& i_rhs)
+    {
+        return (i_lhs.inner_sum(0,mpl::sequence<0,Components>()) > i_rhs.inner_sum(0,mpl::sequence<0,Components>())) ? i_lhs : i_rhs;
+    }
+    friend inline constexpr prod_num min(const prod_num& i_lhs, const prod_num& i_rhs)
+    {
+        return (i_lhs.inner_sum(0,mpl::sequence<0,Components>()) <= i_rhs.inner_sum(0,mpl::sequence<0,Components>())) ? i_lhs : i_rhs;
+    }
+    friend inline constexpr prod_num operator*(const prod_num& i_lhs, const prod_num& i_rhs)
+    {
+        return prod_num<UnderlyingType,Components>(min(i_lhs.partial<0,Components/2>(),i_lhs.partial<Components/2,Components/2>()) *
+                                                   max(i_rhs.partial<0,Components/2>(),i_rhs.partial<Components/2,Components/2>()),
+                                                   max(i_lhs.partial<0,Components/2>(),i_lhs.partial<Components/2,Components/2>()) *
+                                                   min(i_rhs.partial<0,Components/2>(),i_rhs.partial<Components/2,Components/2>()));
+    }
+
+private:
+    template<int ... Ranks>
+    inline constexpr bool inner_construction(const mpl::sequence<Ranks...>&, const UnderlyingType& i_value)
+    {
+        return ( inner_set<Ranks>(i_value) && ...);
+    }
+    template<typename ... Args, int ... Ranks>
+    inline constexpr bool inner_construction(const mpl::sequence<Ranks...>&, const Args& ... i_values)
+    {
+        return ( inner_set<Ranks>(static_cast<UnderlyingType>(i_values)) && ...);
+    }
+    template<int CComponent, int Offset, int ... Ranks>
+    inline constexpr bool inner_construction(const mpl::sequence<Ranks...>&, const prod_num<UnderlyingType,CComponent>& other)
+    {
+        return ( inner_set<Ranks>(other.template inner_get<Ranks>()) && ...);
+    }
+    template<int CComponent>
+    inline constexpr bool inner_set(const UnderlyingType& i_value)
+    {
+        *(m_value + CComponent) = i_value;
+        return true;
+    }
+    template<int Component>
+    inline constexpr UnderlyingType inner_get() const
+    {
+        return *(m_value + Component);
+    }
+    template<int ... Ranks>
+    inline constexpr UnderlyingType inner_prod(size_t i_initRank, const mpl::sequence<Ranks...>&) const
+    {
+        return ( inner_get<i_initRank + Ranks>() * ... );
+    }
+    template<int ... Ranks>
+    inline constexpr UnderlyingType inner_sum(size_t i_initRank, const mpl::sequence<Ranks...>&) const
+    {
+        return ( inner_get<i_initRank + Ranks>() + ... );
+    }
+    template<int InitComponent, int ... Ranks>
+    inline constexpr bool inner_empty(const mpl::sequence<Ranks...>&) const
+    {
+        return ( _inner_empty<InitComponent+Ranks>() && ... );
+    }
+    template<int CComponent>
+    inline constexpr bool _inner_empty() const
+    {
+        return inner_get<CComponent>() == static_cast<UnderlyingType>(1);
+    }
+    template<int CComponents, int ... Ranks>
+    inline constexpr prod_num<UnderlyingType,CComponents> inner_partial(int i_initComponent, const mpl::sequence<Ranks...>&) const
+    {
+        return prod_num<UnderlyingType,CComponents>(m_value[i_initComponent + Ranks] ...);
+    }
+
+    UnderlyingType m_value[Components];
+;
+};
+
+typedef prod_num<unsigned long long,2> uint128;
+typedef prod_num<double,2> double128;
+
+inline constexpr uint128 unfoldPrimes()
+{
+    return uint128(1,1);
+}
+
+template<typename Arg, typename ... Args>
+inline constexpr uint128 unfoldPrimes(Arg&& i_arg, Args&& ... i_args)
+{
+    return i_arg * unfoldPrimes(mpl::forward<Args>(i_args) ...);
+}
+
+template<typename ... T>
+inline constexpr uint128 getPrimeValue(const size_t& i_primeValue)
+{
+    return uint128(i_primeValue,1) * unfoldPrimes(get_bases_prime_id<T,typename T::rtti_base>::value ...);
+}
+
+template<>
+struct _get_bases_prime_id<>
+{
+    static const unsigned long long value = 1;
+};
+
+template<typename Base, typename ... Bases>
+struct _get_bases_prime_id<Base,Bases...>
+{
+    static const unsigned long long value = static_cast<unsigned long long>(get_bases_prime_id<Base,typename Base::rtti_base>::value) * static_cast<unsigned long long>(_get_bases_prime_id<Bases...>::value);
+};
+
+inline constexpr double128 getInvValue(const uint128& i_prime)
+{
+    return double128(static_cast<double>(1)/i_prime[0], static_cast<long double>(1)/i_prime[1]);
+}
+
+template<typename Type, typename ... Bases>
+struct get_bases_prime_id<Type,yame::container::parameter_pack<Bases...>>
+{
+    static constexpr uint128 value = uint128(2,1);//getPrimeValue<Bases...>(yame::math::getPrimeNumber(yame::mpl::static_counter<typename __rtti_tag<Type>::type>::get_next_count()));
+    static const bool expand = (value.empty() == false);
+    static const double128 invValue;
+};
+
+template<typename Type, typename ... Bases>
+const double128 get_bases_prime_id<Type,yame::container::parameter_pack<Bases...>>::invValue = getInvValue(get_bases_prime_id<Type,yame::container::parameter_pack<Bases...>>::value);
+
+template<typename ...>
+struct TypeConversionExpansion;
+
+template<>
+struct TypeConversionExpansion<>
+{
+    static constexpr bool _expansor(bool i_value = true)
+    {
+        return i_value;
+    }
+};
+
+template<typename T, typename ... TT>
+struct TypeConversionExpansion<T,TT...>
+{
+    static constexpr bool _expansor(bool i_value = T::_expansion)
+    {
+        return  TypeConversionExpansion<TT...>::_expansor() && i_value;
+    }
+};
+
+template<typename,typename ...>
+struct TypeDescent;
+
+template<typename Joint,typename T>
+struct TypeDescent<Joint,T,container::parameter_pack<>>
+{
+    static constexpr bool _expansor()
+    {
+        return true;
+    }
+};
+
+template<typename Joint,typename T, typename ... TT>
+struct TypeDescent<Joint,T,container::parameter_pack<TT...>>
+{
+    static constexpr bool _expansor()
+    {
+        return TypeConversionExpansion<rtti_conversor<T,TT,Joint>...>::_expansor() &&
+                TypeConversionExpansion<rtti_conversor<TT,T,Joint>...>::_expansor() &&
+                TypeDescent<Joint,T,TT...>::_expansor();
+    }
+};
+
+template<typename Joint>
+struct TypeDescent<Joint,container::parameter_pack<>>
+{
+    static constexpr bool _expansor()
+    {
+        return true;
+    }
+};
+
+template<typename Joint,typename T,typename ... TT>
+struct TypeDescent<Joint,container::parameter_pack<T,TT...>>
+{
+    static constexpr bool _expansor()
+    {
+        return TypeConversionExpansion<rtti_conversor<Joint,T>>::_expansor() &&
+                TypeDescent<Joint,container::parameter_pack<TT...>>::_expansor() &&
+                TypeDescent<Joint,T>::_expansor();
+    }
+};
+
+template<typename Joint,typename T>
+struct TypeDescent<Joint,T>
+{
+    static constexpr bool _expansor()
+    {
+        return TypeDescent<Joint,typename T::rtti_base>::_expansor();
+    }
+};
+
+template<typename Joint,typename T1, typename T2, typename ... TT2>
+struct TypeDescent<Joint,T1,T2,TT2...>
+{
+    static constexpr bool _expansor()
+    {
+        return TypeConversionExpansion<rtti_conversor<T1,T2,Joint>>::_expansor() &&
+                TypeConversionExpansion<rtti_conversor<T2,T1,Joint>>::_expansor() &&
+                TypeDescent<Joint,T1,typename T2::rtti_base>::_expansor() &&
+                TypeDescent<Joint,T2,typename T1::rtti_base>::_expansor() &&
+                TypeDescent<Joint,T1,TT2...>::_expansor();
+    }
+};
+
+template<typename Joint,typename...>
+struct TypeConversionCombinator;
+
+template<typename Joint>
+struct TypeConversionCombinator<Joint>
+{
+    static constexpr bool _expansor()
+    {
+        return true;
+    }
+};
+
+template<typename Joint, typename T, typename ... TT>
+struct TypeConversionCombinator<Joint,T,TT...>
+{
+    static constexpr bool _expansor()
+    {
+        return TypeDescent<Joint,T,TT...>::_expansor() &&
+                TypeConversionCombinator<Joint,TT...>::_expansor();
+    }
+};
+
+template<typename Type, typename ...>
+struct TypeConversionInstantiator;
+
+template<typename Type, typename ... Bases>
+struct TypeConversionInstantiator
+{
+    //expand from parent to child (up/down, cross casting)
+    template<bool _foo = TypeConversionExpansion<rtti_conversor<Type,Bases>...>::_expansor() && TypeConversionCombinator<Type,Bases...>::_expansor()>
+    static constexpr bool _expansor()
+    {
+        return _foo;
+    }
+};
+
+}
+}
+}

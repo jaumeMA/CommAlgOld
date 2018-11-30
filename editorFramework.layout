@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="Math/cMonomial.h" open="1" top="0" tabpos="10">
+		<Cursor position="1707" topLine="17" />
+	</File>
+	<File name="Utils/engine.h" open="1" top="0" tabpos="4">
+		<Cursor position="817" topLine="0" />
+	</File>
+	<File name="Utils/rtti/TypeAccess.h" open="1" top="0" tabpos="21">
+		<Cursor position="6287" topLine="107" />
+	</File>
+	<File name="Utils/rtti/TypeConversion.h" open="0" top="0" tabpos="0">
+		<Cursor position="28" topLine="0" />
+	</File>
+	<File name="Utils/rtti/TypeConversionInstantiator.h" open="1" top="0" tabpos="16">
+		<Cursor position="2666" topLine="76" />
+	</File>
+	<File name="Utils/rtti/TypeInfo.cpp" open="1" top="0" tabpos="15">
+		<Cursor position="1312" topLine="0" />
+	</File>
+	<File name="Utils/rtti/TypeInfo.h" open="1" top="0" tabpos="14">
+		<Cursor position="1123" topLine="23" />
+	</File>
+	<File name="Utils/rtti/detail/TypeAccess.tpp" open="1" top="1" tabpos="22">
+		<Cursor position="860" topLine="3" />
+	</File>
+	<File name="Utils/rtti/rtti.h" open="1" top="0" tabpos="17">
+		<Cursor position="223" topLine="30" />
+	</File>
+	<File name="YTL/container/cAlgorithm.h" open="0" top="0" tabpos="0">
+		<Cursor position="717" topLine="0" />
+	</File>
+	<File name="YTL/container/cIterableBase.h" open="0" top="0" tabpos="0">
+		<Cursor position="727" topLine="0" />
+	</File>
+	<File name="YTL/container/cParameterPack.h" open="1" top="0" tabpos="18">
+		<Cursor position="2744" topLine="71" />
+	</File>
+	<File name="YTL/container/cStack.h" open="1" top="0" tabpos="8">
+		<Cursor position="160" topLine="0" />
+	</File>
+	<File name="YTL/container/detail/cContainerViewImpl.h" open="0" top="0" tabpos="0">
+		<Cursor position="34" topLine="0" />
+	</File>
+	<File name="YTL/container/detail/cIterableImplBackEnd.h" open="0" top="0" tabpos="0">
+		<Cursor position="81" topLine="0" />
+	</File>
+	<File name="YTL/container/detail/cParameterPack.tpp" open="1" top="0" tabpos="19">
+		<Cursor position="72" topLine="0" />
+	</File>
+	<File name="YTL/container/detail/cTupla_impl.h" open="0" top="0" tabpos="0">
+		<Cursor position="4867" topLine="112" />
+	</File>
+	<File name="YTL/functional/cFunctionStorage.h" open="0" top="0" tabpos="0">
+		<Cursor position="68" topLine="0" />
+	</File>
+	<File name="YTL/functional/detail/cComposedCallable.tpp" open="0" top="0" tabpos="0">
+		<Cursor position="4352" topLine="51" />
+	</File>
+	<File name="YTL/functional/detail/cFunctionImpl.h" open="0" top="0" tabpos="0">
+		<Cursor position="714" topLine="6" />
+	</File>
+	<File name="YTL/mpl/cFunctionTemplateHelper.h" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="12" />
+	</File>
+	<File name="YTL/mpl/cOptionalTemplateHelper.h" open="0" top="0" tabpos="0">
+		<Cursor position="773" topLine="7" />
+	</File>
+	<File name="YTL/mpl/cParameterPackHelper.h" open="1" top="0" tabpos="13">
+		<Cursor position="703" topLine="17" />
+	</File>
+	<File name="YTL/mpl/cParameterPackTemplateHelper.h" open="0" top="0" tabpos="0">
+		<Cursor position="8239" topLine="263" />
+	</File>
+	<File name="YTL/mpl/cVariantTemplateHelper.h" open="0" top="0" tabpos="0">
+		<Cursor position="13" topLine="0" />
+	</File>
+	<File name="YTL/types/embedded_type/detail/embedded_type.tpp" open="1" top="0" tabpos="7">
+		<Cursor position="3011" topLine="92" />
+	</File>
+	<File name="YTL/types/embedded_type/embedded_type.h" open="0" top="0" tabpos="0">
+		<Cursor position="5840" topLine="90" />
+	</File>
+	<File name="YTL/types/optional/detail/optional.tpp" open="0" top="0" tabpos="0">
+		<Cursor position="2690" topLine="91" />
+	</File>
+	<File name="YTL/types/optional/optional.h" open="0" top="0" tabpos="0">
+		<Cursor position="1813" topLine="61" />
+	</File>
+	<File name="YTL/types/smartPtr/enable_ref_from_this.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="728" topLine="0" />
+	</File>
+	<File name="YTL/types/smartPtr/enable_ref_from_this.h" open="0" top="0" tabpos="0">
+		<Cursor position="652" topLine="13" />
+	</File>
+	<File name="YTL/types/smartPtr/lent_ptr.h" open="0" top="0" tabpos="0">
+		<Cursor position="137" topLine="0" />
+	</File>
+	<File name="YTL/types/smartPtr/ptr_utils.h" open="1" top="0" tabpos="5">
+		<Cursor position="1041" topLine="0" />
+	</File>
+	<File name="YTL/types/smartPtr/reference_counter.cpp" open="1" top="0" tabpos="12">
+		<Cursor position="31" topLine="0" />
+	</File>
+	<File name="YTL/types/smartPtr/shared_ptr.h" open="1" top="0" tabpos="6">
+		<Cursor position="129" topLine="32" />
+	</File>
+	<File name="YTL/types/smartPtr/unique_ptr.h" open="1" top="0" tabpos="3">
+		<Cursor position="218" topLine="0" />
+	</File>
+	<File name="YTL/types/taggedPtr/detail/tagged_pointer.tpp" open="0" top="0" tabpos="0">
+		<Cursor position="32" topLine="0" />
+	</File>
+	<File name="YTL/types/taggedPtr/tagged_pointer.h" open="0" top="0" tabpos="0">
+		<Cursor position="2755" topLine="54" />
+	</File>
+	<File name="YTL/types/variant/detail/builtin_visitors.h" open="0" top="0" tabpos="0">
+		<Cursor position="138" topLine="48" />
+	</File>
+	<File name="YTL/types/variant/detail/builtin_visitors.tpp" open="0" top="0" tabpos="0">
+		<Cursor position="435" topLine="70" />
+	</File>
+	<File name="YTL/types/variant/detail/variant.tpp" open="0" top="0" tabpos="0">
+		<Cursor position="1" topLine="0" />
+	</File>
+	<File name="YTL/types/variant/detail/variant_impl.h" open="0" top="0" tabpos="0">
+		<Cursor position="2166" topLine="34" />
+	</File>
+	<File name="YTL/types/variant/detail/variant_impl.tpp" open="0" top="0" tabpos="0">
+		<Cursor position="2095" topLine="56" />
+	</File>
+	<File name="YTL/types/variant/detail/variant_interface.h" open="0" top="0" tabpos="0">
+		<Cursor position="2010" topLine="29" />
+	</File>
+	<File name="YTL/types/variant/detail/variant_interface.tpp" open="0" top="0" tabpos="0">
+		<Cursor position="48" topLine="0" />
+	</File>
+	<File name="YTL/types/variant/variant.h" open="0" top="0" tabpos="0">
+		<Cursor position="2913" topLine="27" />
+	</File>
+</CodeBlocks_layout_file>

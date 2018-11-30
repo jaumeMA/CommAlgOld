@@ -1,0 +1,420 @@
+%{
+#include <string>
+#include <vector>
+#include <math.h>
+#include "cXMLreader.h"
+#include "cProperty.h"
+
+#define YYMAXDEPTH 200000
+
+using namespace std;
+//-- Lexer prototype required by bison, aka getNextToken()
+extern int xml_lex(void);
+
+extern void xml_set_in (FILE *);
+extern void xml_restart (FILE *);
+
+int xml_error(const char *p) { printf("NANO: Error %s\n",p); }
+
+std::string version;
+std::string encoding;
+std::string standalone;
+std::string currText;
+std::string cDataText;
+std::string currTag;
+std::string currPropId;
+std::string currPropVal;
+std::vector<yame::xml::cProperty> currProperties;
+bool isCdata = false;
+
+extern void lexParse(yame::xml::cXMLreader *caller, FILE *in);
+void startNode(const std::string& tag, const std::vector<yame::xml::cProperty>& props);
+void contentNode(const std::string& content);
+void endNode(const std::string& tag);
+
+yame::xml::cXMLreader *g_caller;
+%}
+
+%name-prefix "xml_"
+%error-verbose
+
+//-- SYMBOL SEMANTIC VALUES -----------------------------
+%union
+{
+    int val;
+    char *sym;
+    char unit_sym;
+};
+
+%token <sym> START_VERSION STOP_VERSION START_INFO STOP_INFO START_TAG STOP_TAG END_TAG CDATA_BEGIN CDATA_END
+%token <unit_sym> TEXT SYMBOLS TEQUAL TSPACE TQUOTATION TTAB END_LINE
+%type  <val> version_id encoding_id standalone_id
+%type  <sym> stmnt xml xml_unit version version_value encoding_value standalone_value info start_node start_node_content stop_node text_block text free_text
+%type  <sym> id tag_node prop_id_node prop_val_node properties property cdata_begin cdata_end
+
+//-- GRAMMAR RULES ---------------------------------------
+%%
+run: xml
+
+xml: xml_unit xml | xml_unit
+
+xml_unit: stmnt xml_unit
+            | stmnt
+
+stmnt:
+    version { $$ = $1; }
+    | info { $$ = $1; }
+    | start_node
+    {
+        $$ = $1;
+    }
+    | TSPACE start_node
+    {
+        $$ = $2;
+    }
+    | start_node text_block stop_node
+    {
+        $$ = $2;
+    }
+    | TSPACE start_node text_block stop_node
+    {
+        $$ = $3;
+    }
+    | start_node text_block
+    {
+        $$ = $2;
+    }
+    | TSPACE start_node text_block
+    {
+        $$ = $3;
+    }
+    | cdata_begin
+    | cdata_end
+    {
+        //send it as normal text
+        contentNode(cDataText);
+    }
+    | stop_node { $$ = $1; }
+    | TSPACE stop_node { $$ = $2; }
+    | text_block stop_node
+    {
+        $$ = $1;
+    }
+    | TSPACE text_block stop_node
+    {
+        $$ = $2;
+    }
+    | text_block
+    {
+        $$ = $1;
+    }
+    | TSPACE text_block
+    {
+        $$ = $2;
+    }
+
+version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION STOP_VERSION
+    {
+        g_caller->_version($6);
+        $$ = $1;
+        version.clear();
+    }
+    | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+    {
+        g_caller->_version($6,$12);
+        $$ = $1;
+        version.clear();
+        encoding.clear();
+    }
+    | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+    {
+        g_caller->_version($6,$12,$18);
+        $$ = $1;
+        version.clear();
+        encoding.clear();
+        standalone.clear();
+    }
+
+version_id: id
+    {
+        currText.clear();
+        $$ = 0;
+    }
+
+version_value: text
+    {
+        version = currText;
+        currText.clear();
+        $$ = (char *)version.c_str();
+    }
+
+encoding_id: id
+    {
+        currText.clear();
+        $$ = 0;
+    }
+
+encoding_value: text
+    {
+        encoding = currText;
+        currText.clear();
+        $$ = (char *)encoding.c_str();
+    }
+
+standalone_id: id
+    {
+        currText.clear();
+        $$ = 0;
+    }
+
+standalone_value: text
+    {
+        standalone = currText;
+        currText.clear();
+        $$ = (char *)standalone.c_str();
+    }
+
+info: START_INFO text STOP_INFO
+    {
+        g_caller->_info($2);
+        currText.clear();
+        $$ = $2;
+    }
+
+start_node: START_TAG start_node_content STOP_TAG
+        {
+            $$ = $2;
+        }
+        | START_TAG start_node_content END_TAG
+        {
+            $$ = $2;
+            endNode(currTag);
+        }
+
+stop_node: END_TAG tag_node STOP_TAG
+        {
+            endNode(currTag);
+            $$ = $2;
+        }
+
+start_node_content: tag_node TSPACE properties
+            {
+                $$ = $1;
+                startNode(currTag,currProperties);
+                currProperties.clear();
+            }
+            | tag_node
+            {
+                $$ = $1;
+                startNode(currTag,currProperties);
+                currProperties.clear();
+            }
+
+properties: property TSPACE properties
+            {
+                $$ = $1;
+            }
+            | property TSPACE
+            {
+                $$ = $1;
+            }
+            | property
+            {
+                $$ = $1;
+            }
+
+property: prop_id_node TEQUAL TQUOTATION prop_val_node TQUOTATION
+        {
+            yame::xml::cProperty prop(currPropId,currPropVal);
+            currProperties.push_back(prop);
+            $$ = $1;
+            currPropId.clear();
+            currPropVal.clear();
+        }
+        | prop_id_node TEQUAL TQUOTATION TQUOTATION
+        {
+            yame::xml::cProperty prop(currPropId,"");
+            currProperties.push_back(prop);
+            $$ = $1;
+            currPropId.clear();
+            currPropVal.clear();
+        }
+
+cdata_begin: CDATA_BEGIN
+    {
+        isCdata = true;
+        cDataText.clear();
+    }
+
+cdata_end: CDATA_END
+    {
+        isCdata = false;
+    }
+
+text_block: free_text
+    {
+        contentNode(currText);
+        currText.clear();
+        $$ = $1;
+    }
+
+free_text: text
+    {
+        $$ = $1;
+    }
+    | TQUOTATION free_text
+    {
+        currText.insert(0,1,$1);
+        $$ = (char *)currText.c_str();
+    }
+    | TQUOTATION
+    {
+        currText.push_back($1);
+        $$ = (char *)currText.c_str();
+    }
+
+
+text: TEXT text
+    {
+        currText.insert(0,1,$1);
+        $$ = (char *)currText.c_str();
+    }
+    | TEXT
+    {
+        currText.push_back($1);
+        $$ = (char *)currText.c_str();
+    }
+    | SYMBOLS text
+    {
+        currText.insert(0,1,$1);
+        $$ = (char *)currText.c_str();
+    }
+    | SYMBOLS
+    {
+        currText.push_back($1);
+        $$ = (char *)currText.c_str();
+    }
+    | TSPACE text
+    {
+        currText.insert(0,1,$1);
+        $$ = (char *)currText.c_str();
+    }
+    | TSPACE
+    {
+        currText.push_back($1);
+        $$ = (char *)currText.c_str();
+    }
+    | TEQUAL text
+    {
+        currText.insert(0,1,$1);
+        $$ = (char *)currText.c_str();
+    }
+
+id: TEXT id
+    {
+        currText.insert(0,1,$1);
+        $$ = (char *)currText.c_str();
+    }
+    | TEXT
+    {
+        currText.push_back($1);
+        $$ = (char *)currText.c_str();
+    }
+
+tag_node: id
+    {
+        currTag.clear();
+        currTag = currText;
+        currText.clear();
+        $$ = $1;
+    }
+
+prop_id_node: id
+    {
+        currPropId = currText;
+        currText.clear();
+        $$ = (char *)currPropId.c_str();
+    }
+
+prop_val_node: text
+    {
+        currPropVal = currText;
+        currText.clear();
+        $$ = (char *)currPropVal.c_str();
+    }
+
+%%
+//-- FUNCTION DEFINITIONS ---------------------------------
+
+void startNode(const std::string& tag, const std::vector<yame::xml::cProperty>& props)
+{
+    if(isCdata)
+    {
+        cDataText += "&lt;"+tag;
+
+        std::string propsStr;
+
+        for(int i=0;i<props.size();i++)
+        {
+            cDataText += std::string(props[i].m_id.getStr()) + "=" + std::string(props[i].m_val.getStr());
+        }
+
+        cDataText += "&gt;";
+    }
+    else
+    {
+        g_caller->_startTag(tag,props);
+    }
+
+    return;
+}
+
+void contentNode(const std::string& content)
+{
+    if(isCdata)
+    {
+        cDataText += content;
+    }
+    else
+    {
+        g_caller->_contentTag(content);
+    }
+
+    return;
+}
+
+void endNode(const std::string& tag)
+{
+    if(isCdata)
+    {
+        cDataText += "&lt;/" + tag + "&gt;";
+    }
+    else
+    {
+        g_caller->_stopTag(currTag);
+    }
+
+    return;
+}
+
+void lexParse(yame::xml::cXMLreader* caller, FILE *in)
+{
+    if(in && caller)
+    {
+        version.clear();
+        encoding.clear();
+        standalone.clear();
+        currText.clear();
+        currTag.clear();
+        currPropId.clear();
+        currPropVal.clear();
+        currProperties.clear();
+
+        xml_set_in(in);
+        xml_restart(in);
+        g_caller = caller;
+        xml_parse();
+    }
+
+    return;
+}

@@ -1,0 +1,85 @@
+#pragma once
+
+#include "rttiDefs.h"
+#include "YTL/container/cArray.h"
+#include "YTL/container/cString.h"
+#include "YTL/container/cPair.h"
+
+namespace yame
+{
+namespace rtti
+{
+
+class TypeInfo;
+
+}
+
+//JAUME: there is a known issue about expansion templates and copy constructibility
+namespace mpl
+{
+template<>
+struct is_copy_constructible<rtti::TypeInfo>
+{
+static const bool value = true;
+};
+}
+
+namespace rtti
+{
+namespace detail
+{
+
+template<typename Type, typename MemberType>
+struct TypeMemberData
+{
+    static const char* getMemberName(const char* i_memberName = NULL)
+    {
+        static const char* s_memberName = i_memberName;
+
+        return s_memberName;
+    }
+};
+
+}
+
+typedef size_t TypeId;
+
+class TypeInfo
+{
+    typedef container::cArray<TypeInfo> base_container;
+    typedef container::cArray<container::cPair<container::string,TypeInfo>> member_container;
+
+public:
+    typedef base_container::const_iterable_public_interface const_base_iterable;
+    typedef member_container::const_iterable_public_interface const_member_iterable;
+
+    TypeInfo(const container::string& i_name, TypeId i_id, const container::cArray<TypeInfo>& i_bases);
+    TypeInfo(const TypeInfo& other);
+    TypeInfo(TypeInfo&& other);
+
+    container::string getName() const;
+    TypeId getId() const;
+    const const_base_iterable& getBases() const;
+    //const_member_iterable getMembers() const;
+
+    TypeInfo& operator=(const TypeInfo& other);
+    TypeInfo& operator=(const TypeInfo&& other);
+
+private:
+    container::string m_name;
+    TypeId m_id;
+    container::string m_typeName;
+    base_container m_bases;
+    //const member_container m_members;
+};
+
+template<typename T>
+TypeInfo getTypeInfo()
+{
+    return __get_rtti_type_info(static_cast<const T*>(NULL));
+}
+
+}
+}
+
+#include "Utils/rtti/detail/TypeInfo.tpp"

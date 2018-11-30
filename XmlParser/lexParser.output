@@ -1,0 +1,1208 @@
+Terminals unused in grammar
+
+   TTAB
+   END_LINE
+
+
+State 7 conflicts: 4 shift/reduce
+State 8 conflicts: 4 shift/reduce
+State 10 conflicts: 7 shift/reduce
+State 11 conflicts: 5 shift/reduce
+State 15 conflicts: 11 shift/reduce
+State 18 conflicts: 5 shift/reduce
+State 22 conflicts: 1 shift/reduce
+State 26 conflicts: 4 shift/reduce
+State 36 conflicts: 5 shift/reduce
+State 38 conflicts: 1 shift/reduce
+State 39 conflicts: 12 reduce/reduce
+State 44 conflicts: 1 shift/reduce
+State 55 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: run $end
+
+    1 run: xml
+
+    2 xml: xml_unit xml
+    3    | xml_unit
+
+    4 xml_unit: stmnt xml_unit
+    5         | stmnt
+
+    6 stmnt: version
+    7      | info
+    8      | start_node
+    9      | TSPACE start_node
+   10      | start_node text_block stop_node
+   11      | TSPACE start_node text_block stop_node
+   12      | start_node text_block
+   13      | TSPACE start_node text_block
+   14      | cdata_begin
+   15      | cdata_end
+   16      | stop_node
+   17      | TSPACE stop_node
+   18      | text_block stop_node
+   19      | TSPACE text_block stop_node
+   20      | text_block
+   21      | TSPACE text_block
+
+   22 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION STOP_VERSION
+   23        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+   25 version_id: id
+
+   26 version_value: text
+
+   27 encoding_id: id
+
+   28 encoding_value: text
+
+   29 standalone_id: id
+
+   30 standalone_value: text
+
+   31 info: START_INFO text STOP_INFO
+
+   32 start_node: START_TAG start_node_content STOP_TAG
+   33           | START_TAG start_node_content END_TAG
+
+   34 stop_node: END_TAG tag_node STOP_TAG
+
+   35 start_node_content: tag_node TSPACE properties
+   36                   | tag_node
+
+   37 properties: property TSPACE properties
+   38           | property TSPACE
+   39           | property
+
+   40 property: prop_id_node TEQUAL TQUOTATION prop_val_node TQUOTATION
+   41         | prop_id_node TEQUAL TQUOTATION TQUOTATION
+
+   42 cdata_begin: CDATA_BEGIN
+
+   43 cdata_end: CDATA_END
+
+   44 text_block: free_text
+
+   45 free_text: text
+   46          | TQUOTATION free_text
+   47          | TQUOTATION
+
+   48 text: TEXT text
+   49     | TEXT
+   50     | SYMBOLS text
+   51     | SYMBOLS
+   52     | TSPACE text
+   53     | TSPACE
+   54     | TEQUAL text
+
+   55 id: TEXT id
+   56   | TEXT
+
+   57 tag_node: id
+
+   58 prop_id_node: id
+
+   59 prop_val_node: text
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+START_VERSION (258) 22 23 24
+STOP_VERSION (259) 22 23 24
+START_INFO (260) 31
+STOP_INFO (261) 31
+START_TAG (262) 32 33
+STOP_TAG (263) 32 34
+END_TAG (264) 33 34
+CDATA_BEGIN (265) 42
+CDATA_END (266) 43
+TEXT (267) 48 49 55 56
+SYMBOLS (268) 50 51
+TEQUAL (269) 22 23 24 40 41 54
+TSPACE (270) 9 11 13 17 19 21 22 23 24 35 37 38 52 53
+TQUOTATION (271) 22 23 24 40 41 46 47
+TTAB (272)
+END_LINE (273)
+
+
+Nonterminals, with rules where they appear
+
+$accept (19)
+    on left: 0
+run (20)
+    on left: 1, on right: 0
+xml (21)
+    on left: 2 3, on right: 1 2
+xml_unit (22)
+    on left: 4 5, on right: 2 3 4
+stmnt (23)
+    on left: 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21, on right:
+    4 5
+version (24)
+    on left: 22 23 24, on right: 6
+version_id (25)
+    on left: 25, on right: 22 23 24
+version_value (26)
+    on left: 26, on right: 22 23 24
+encoding_id (27)
+    on left: 27, on right: 23 24
+encoding_value (28)
+    on left: 28, on right: 23 24
+standalone_id (29)
+    on left: 29, on right: 24
+standalone_value (30)
+    on left: 30, on right: 24
+info (31)
+    on left: 31, on right: 7
+start_node (32)
+    on left: 32 33, on right: 8 9 10 11 12 13
+stop_node (33)
+    on left: 34, on right: 10 11 16 17 18 19
+start_node_content (34)
+    on left: 35 36, on right: 32 33
+properties (35)
+    on left: 37 38 39, on right: 35 37
+property (36)
+    on left: 40 41, on right: 37 38 39
+cdata_begin (37)
+    on left: 42, on right: 14
+cdata_end (38)
+    on left: 43, on right: 15
+text_block (39)
+    on left: 44, on right: 10 11 12 13 18 19 20 21
+free_text (40)
+    on left: 45 46 47, on right: 44 46
+text (41)
+    on left: 48 49 50 51 52 53 54, on right: 26 28 30 31 45 48 50 52
+    54 59
+id (42)
+    on left: 55 56, on right: 25 27 29 55 57 58
+tag_node (43)
+    on left: 57, on right: 34 35 36
+prop_id_node (44)
+    on left: 58, on right: 40 41
+prop_val_node (45)
+    on left: 59, on right: 40
+
+
+state 0
+
+    0 $accept: . run $end
+
+    START_VERSION  shift, and go to state 1
+    START_INFO     shift, and go to state 2
+    START_TAG      shift, and go to state 3
+    END_TAG        shift, and go to state 4
+    CDATA_BEGIN    shift, and go to state 5
+    CDATA_END      shift, and go to state 6
+    TEXT           shift, and go to state 7
+    SYMBOLS        shift, and go to state 8
+    TEQUAL         shift, and go to state 9
+    TSPACE         shift, and go to state 10
+    TQUOTATION     shift, and go to state 11
+
+    run          go to state 12
+    xml          go to state 13
+    xml_unit     go to state 14
+    stmnt        go to state 15
+    version      go to state 16
+    info         go to state 17
+    start_node   go to state 18
+    stop_node    go to state 19
+    cdata_begin  go to state 20
+    cdata_end    go to state 21
+    text_block   go to state 22
+    free_text    go to state 23
+    text         go to state 24
+
+
+state 1
+
+   22 version: START_VERSION . TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION STOP_VERSION
+   23        | START_VERSION . TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION . TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TSPACE  shift, and go to state 25
+
+
+state 2
+
+   31 info: START_INFO . text STOP_INFO
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    text  go to state 27
+
+
+state 3
+
+   32 start_node: START_TAG . start_node_content STOP_TAG
+   33           | START_TAG . start_node_content END_TAG
+
+    TEXT  shift, and go to state 28
+
+    start_node_content  go to state 29
+    id                  go to state 30
+    tag_node            go to state 31
+
+
+state 4
+
+   34 stop_node: END_TAG . tag_node STOP_TAG
+
+    TEXT  shift, and go to state 28
+
+    id        go to state 30
+    tag_node  go to state 32
+
+
+state 5
+
+   42 cdata_begin: CDATA_BEGIN .
+
+    $default  reduce using rule 42 (cdata_begin)
+
+
+state 6
+
+   43 cdata_end: CDATA_END .
+
+    $default  reduce using rule 43 (cdata_end)
+
+
+state 7
+
+   48 text: TEXT . text
+   49     | TEXT .
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    TEXT      [reduce using rule 49 (text)]
+    SYMBOLS   [reduce using rule 49 (text)]
+    TEQUAL    [reduce using rule 49 (text)]
+    TSPACE    [reduce using rule 49 (text)]
+    $default  reduce using rule 49 (text)
+
+    text  go to state 33
+
+
+state 8
+
+   50 text: SYMBOLS . text
+   51     | SYMBOLS .
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    TEXT      [reduce using rule 51 (text)]
+    SYMBOLS   [reduce using rule 51 (text)]
+    TEQUAL    [reduce using rule 51 (text)]
+    TSPACE    [reduce using rule 51 (text)]
+    $default  reduce using rule 51 (text)
+
+    text  go to state 34
+
+
+state 9
+
+   54 text: TEQUAL . text
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    text  go to state 35
+
+
+state 10
+
+    9 stmnt: TSPACE . start_node
+   11      | TSPACE . start_node text_block stop_node
+   13      | TSPACE . start_node text_block
+   17      | TSPACE . stop_node
+   19      | TSPACE . text_block stop_node
+   21      | TSPACE . text_block
+   52 text: TSPACE . text
+   53     | TSPACE .
+
+    START_TAG   shift, and go to state 3
+    END_TAG     shift, and go to state 4
+    TEXT        shift, and go to state 7
+    SYMBOLS     shift, and go to state 8
+    TEQUAL      shift, and go to state 9
+    TSPACE      shift, and go to state 26
+    TQUOTATION  shift, and go to state 11
+
+    START_TAG   [reduce using rule 53 (text)]
+    END_TAG     [reduce using rule 53 (text)]
+    TEXT        [reduce using rule 53 (text)]
+    SYMBOLS     [reduce using rule 53 (text)]
+    TEQUAL      [reduce using rule 53 (text)]
+    TSPACE      [reduce using rule 53 (text)]
+    TQUOTATION  [reduce using rule 53 (text)]
+    $default    reduce using rule 53 (text)
+
+    start_node  go to state 36
+    stop_node   go to state 37
+    text_block  go to state 38
+    free_text   go to state 23
+    text        go to state 39
+
+
+state 11
+
+   46 free_text: TQUOTATION . free_text
+   47          | TQUOTATION .
+
+    TEXT        shift, and go to state 7
+    SYMBOLS     shift, and go to state 8
+    TEQUAL      shift, and go to state 9
+    TSPACE      shift, and go to state 26
+    TQUOTATION  shift, and go to state 11
+
+    TEXT        [reduce using rule 47 (free_text)]
+    SYMBOLS     [reduce using rule 47 (free_text)]
+    TEQUAL      [reduce using rule 47 (free_text)]
+    TSPACE      [reduce using rule 47 (free_text)]
+    TQUOTATION  [reduce using rule 47 (free_text)]
+    $default    reduce using rule 47 (free_text)
+
+    free_text  go to state 40
+    text       go to state 24
+
+
+state 12
+
+    0 $accept: run . $end
+
+    $end  shift, and go to state 41
+
+
+state 13
+
+    1 run: xml .
+
+    $default  reduce using rule 1 (run)
+
+
+state 14
+
+    2 xml: xml_unit . xml
+    3    | xml_unit .
+
+    START_VERSION  shift, and go to state 1
+    START_INFO     shift, and go to state 2
+    START_TAG      shift, and go to state 3
+    END_TAG        shift, and go to state 4
+    CDATA_BEGIN    shift, and go to state 5
+    CDATA_END      shift, and go to state 6
+    TEXT           shift, and go to state 7
+    SYMBOLS        shift, and go to state 8
+    TEQUAL         shift, and go to state 9
+    TSPACE         shift, and go to state 10
+    TQUOTATION     shift, and go to state 11
+
+    $default  reduce using rule 3 (xml)
+
+    xml          go to state 42
+    xml_unit     go to state 14
+    stmnt        go to state 15
+    version      go to state 16
+    info         go to state 17
+    start_node   go to state 18
+    stop_node    go to state 19
+    cdata_begin  go to state 20
+    cdata_end    go to state 21
+    text_block   go to state 22
+    free_text    go to state 23
+    text         go to state 24
+
+
+state 15
+
+    4 xml_unit: stmnt . xml_unit
+    5         | stmnt .
+
+    START_VERSION  shift, and go to state 1
+    START_INFO     shift, and go to state 2
+    START_TAG      shift, and go to state 3
+    END_TAG        shift, and go to state 4
+    CDATA_BEGIN    shift, and go to state 5
+    CDATA_END      shift, and go to state 6
+    TEXT           shift, and go to state 7
+    SYMBOLS        shift, and go to state 8
+    TEQUAL         shift, and go to state 9
+    TSPACE         shift, and go to state 10
+    TQUOTATION     shift, and go to state 11
+
+    START_VERSION  [reduce using rule 5 (xml_unit)]
+    START_INFO     [reduce using rule 5 (xml_unit)]
+    START_TAG      [reduce using rule 5 (xml_unit)]
+    END_TAG        [reduce using rule 5 (xml_unit)]
+    CDATA_BEGIN    [reduce using rule 5 (xml_unit)]
+    CDATA_END      [reduce using rule 5 (xml_unit)]
+    TEXT           [reduce using rule 5 (xml_unit)]
+    SYMBOLS        [reduce using rule 5 (xml_unit)]
+    TEQUAL         [reduce using rule 5 (xml_unit)]
+    TSPACE         [reduce using rule 5 (xml_unit)]
+    TQUOTATION     [reduce using rule 5 (xml_unit)]
+    $default       reduce using rule 5 (xml_unit)
+
+    xml_unit     go to state 43
+    stmnt        go to state 15
+    version      go to state 16
+    info         go to state 17
+    start_node   go to state 18
+    stop_node    go to state 19
+    cdata_begin  go to state 20
+    cdata_end    go to state 21
+    text_block   go to state 22
+    free_text    go to state 23
+    text         go to state 24
+
+
+state 16
+
+    6 stmnt: version .
+
+    $default  reduce using rule 6 (stmnt)
+
+
+state 17
+
+    7 stmnt: info .
+
+    $default  reduce using rule 7 (stmnt)
+
+
+state 18
+
+    8 stmnt: start_node .
+   10      | start_node . text_block stop_node
+   12      | start_node . text_block
+
+    TEXT        shift, and go to state 7
+    SYMBOLS     shift, and go to state 8
+    TEQUAL      shift, and go to state 9
+    TSPACE      shift, and go to state 26
+    TQUOTATION  shift, and go to state 11
+
+    TEXT        [reduce using rule 8 (stmnt)]
+    SYMBOLS     [reduce using rule 8 (stmnt)]
+    TEQUAL      [reduce using rule 8 (stmnt)]
+    TSPACE      [reduce using rule 8 (stmnt)]
+    TQUOTATION  [reduce using rule 8 (stmnt)]
+    $default    reduce using rule 8 (stmnt)
+
+    text_block  go to state 44
+    free_text   go to state 23
+    text        go to state 24
+
+
+state 19
+
+   16 stmnt: stop_node .
+
+    $default  reduce using rule 16 (stmnt)
+
+
+state 20
+
+   14 stmnt: cdata_begin .
+
+    $default  reduce using rule 14 (stmnt)
+
+
+state 21
+
+   15 stmnt: cdata_end .
+
+    $default  reduce using rule 15 (stmnt)
+
+
+state 22
+
+   18 stmnt: text_block . stop_node
+   20      | text_block .
+
+    END_TAG  shift, and go to state 4
+
+    END_TAG   [reduce using rule 20 (stmnt)]
+    $default  reduce using rule 20 (stmnt)
+
+    stop_node  go to state 45
+
+
+state 23
+
+   44 text_block: free_text .
+
+    $default  reduce using rule 44 (text_block)
+
+
+state 24
+
+   45 free_text: text .
+
+    $default  reduce using rule 45 (free_text)
+
+
+state 25
+
+   22 version: START_VERSION TSPACE . version_id TEQUAL TQUOTATION version_value TQUOTATION STOP_VERSION
+   23        | START_VERSION TSPACE . version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE . version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEXT  shift, and go to state 28
+
+    version_id  go to state 46
+    id          go to state 47
+
+
+state 26
+
+   52 text: TSPACE . text
+   53     | TSPACE .
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    TEXT      [reduce using rule 53 (text)]
+    SYMBOLS   [reduce using rule 53 (text)]
+    TEQUAL    [reduce using rule 53 (text)]
+    TSPACE    [reduce using rule 53 (text)]
+    $default  reduce using rule 53 (text)
+
+    text  go to state 48
+
+
+state 27
+
+   31 info: START_INFO text . STOP_INFO
+
+    STOP_INFO  shift, and go to state 49
+
+
+state 28
+
+   55 id: TEXT . id
+   56   | TEXT .
+
+    TEXT  shift, and go to state 28
+
+    $default  reduce using rule 56 (id)
+
+    id  go to state 50
+
+
+state 29
+
+   32 start_node: START_TAG start_node_content . STOP_TAG
+   33           | START_TAG start_node_content . END_TAG
+
+    STOP_TAG  shift, and go to state 51
+    END_TAG   shift, and go to state 52
+
+
+state 30
+
+   57 tag_node: id .
+
+    $default  reduce using rule 57 (tag_node)
+
+
+state 31
+
+   35 start_node_content: tag_node . TSPACE properties
+   36                   | tag_node .
+
+    TSPACE  shift, and go to state 53
+
+    $default  reduce using rule 36 (start_node_content)
+
+
+state 32
+
+   34 stop_node: END_TAG tag_node . STOP_TAG
+
+    STOP_TAG  shift, and go to state 54
+
+
+state 33
+
+   48 text: TEXT text .
+
+    $default  reduce using rule 48 (text)
+
+
+state 34
+
+   50 text: SYMBOLS text .
+
+    $default  reduce using rule 50 (text)
+
+
+state 35
+
+   54 text: TEQUAL text .
+
+    $default  reduce using rule 54 (text)
+
+
+state 36
+
+    9 stmnt: TSPACE start_node .
+   11      | TSPACE start_node . text_block stop_node
+   13      | TSPACE start_node . text_block
+
+    TEXT        shift, and go to state 7
+    SYMBOLS     shift, and go to state 8
+    TEQUAL      shift, and go to state 9
+    TSPACE      shift, and go to state 26
+    TQUOTATION  shift, and go to state 11
+
+    TEXT        [reduce using rule 9 (stmnt)]
+    SYMBOLS     [reduce using rule 9 (stmnt)]
+    TEQUAL      [reduce using rule 9 (stmnt)]
+    TSPACE      [reduce using rule 9 (stmnt)]
+    TQUOTATION  [reduce using rule 9 (stmnt)]
+    $default    reduce using rule 9 (stmnt)
+
+    text_block  go to state 55
+    free_text   go to state 23
+    text        go to state 24
+
+
+state 37
+
+   17 stmnt: TSPACE stop_node .
+
+    $default  reduce using rule 17 (stmnt)
+
+
+state 38
+
+   19 stmnt: TSPACE text_block . stop_node
+   21      | TSPACE text_block .
+
+    END_TAG  shift, and go to state 4
+
+    END_TAG   [reduce using rule 21 (stmnt)]
+    $default  reduce using rule 21 (stmnt)
+
+    stop_node  go to state 56
+
+
+state 39
+
+   45 free_text: text .
+   52 text: TSPACE text .
+
+    $end           reduce using rule 45 (free_text)
+    $end           [reduce using rule 52 (text)]
+    START_VERSION  reduce using rule 45 (free_text)
+    START_VERSION  [reduce using rule 52 (text)]
+    START_INFO     reduce using rule 45 (free_text)
+    START_INFO     [reduce using rule 52 (text)]
+    START_TAG      reduce using rule 45 (free_text)
+    START_TAG      [reduce using rule 52 (text)]
+    END_TAG        reduce using rule 45 (free_text)
+    END_TAG        [reduce using rule 52 (text)]
+    CDATA_BEGIN    reduce using rule 45 (free_text)
+    CDATA_BEGIN    [reduce using rule 52 (text)]
+    CDATA_END      reduce using rule 45 (free_text)
+    CDATA_END      [reduce using rule 52 (text)]
+    TEXT           reduce using rule 45 (free_text)
+    TEXT           [reduce using rule 52 (text)]
+    SYMBOLS        reduce using rule 45 (free_text)
+    SYMBOLS        [reduce using rule 52 (text)]
+    TEQUAL         reduce using rule 45 (free_text)
+    TEQUAL         [reduce using rule 52 (text)]
+    TSPACE         reduce using rule 45 (free_text)
+    TSPACE         [reduce using rule 52 (text)]
+    TQUOTATION     reduce using rule 45 (free_text)
+    TQUOTATION     [reduce using rule 52 (text)]
+    $default       reduce using rule 45 (free_text)
+
+
+state 40
+
+   46 free_text: TQUOTATION free_text .
+
+    $default  reduce using rule 46 (free_text)
+
+
+state 41
+
+    0 $accept: run $end .
+
+    $default  accept
+
+
+state 42
+
+    2 xml: xml_unit xml .
+
+    $default  reduce using rule 2 (xml)
+
+
+state 43
+
+    4 xml_unit: stmnt xml_unit .
+
+    $default  reduce using rule 4 (xml_unit)
+
+
+state 44
+
+   10 stmnt: start_node text_block . stop_node
+   12      | start_node text_block .
+
+    END_TAG  shift, and go to state 4
+
+    END_TAG   [reduce using rule 12 (stmnt)]
+    $default  reduce using rule 12 (stmnt)
+
+    stop_node  go to state 57
+
+
+state 45
+
+   18 stmnt: text_block stop_node .
+
+    $default  reduce using rule 18 (stmnt)
+
+
+state 46
+
+   22 version: START_VERSION TSPACE version_id . TEQUAL TQUOTATION version_value TQUOTATION STOP_VERSION
+   23        | START_VERSION TSPACE version_id . TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id . TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEQUAL  shift, and go to state 58
+
+
+state 47
+
+   25 version_id: id .
+
+    $default  reduce using rule 25 (version_id)
+
+
+state 48
+
+   52 text: TSPACE text .
+
+    $default  reduce using rule 52 (text)
+
+
+state 49
+
+   31 info: START_INFO text STOP_INFO .
+
+    $default  reduce using rule 31 (info)
+
+
+state 50
+
+   55 id: TEXT id .
+
+    $default  reduce using rule 55 (id)
+
+
+state 51
+
+   32 start_node: START_TAG start_node_content STOP_TAG .
+
+    $default  reduce using rule 32 (start_node)
+
+
+state 52
+
+   33 start_node: START_TAG start_node_content END_TAG .
+
+    $default  reduce using rule 33 (start_node)
+
+
+state 53
+
+   35 start_node_content: tag_node TSPACE . properties
+
+    TEXT  shift, and go to state 28
+
+    properties    go to state 59
+    property      go to state 60
+    id            go to state 61
+    prop_id_node  go to state 62
+
+
+state 54
+
+   34 stop_node: END_TAG tag_node STOP_TAG .
+
+    $default  reduce using rule 34 (stop_node)
+
+
+state 55
+
+   11 stmnt: TSPACE start_node text_block . stop_node
+   13      | TSPACE start_node text_block .
+
+    END_TAG  shift, and go to state 4
+
+    END_TAG   [reduce using rule 13 (stmnt)]
+    $default  reduce using rule 13 (stmnt)
+
+    stop_node  go to state 63
+
+
+state 56
+
+   19 stmnt: TSPACE text_block stop_node .
+
+    $default  reduce using rule 19 (stmnt)
+
+
+state 57
+
+   10 stmnt: start_node text_block stop_node .
+
+    $default  reduce using rule 10 (stmnt)
+
+
+state 58
+
+   22 version: START_VERSION TSPACE version_id TEQUAL . TQUOTATION version_value TQUOTATION STOP_VERSION
+   23        | START_VERSION TSPACE version_id TEQUAL . TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL . TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TQUOTATION  shift, and go to state 64
+
+
+state 59
+
+   35 start_node_content: tag_node TSPACE properties .
+
+    $default  reduce using rule 35 (start_node_content)
+
+
+state 60
+
+   37 properties: property . TSPACE properties
+   38           | property . TSPACE
+   39           | property .
+
+    TSPACE  shift, and go to state 65
+
+    $default  reduce using rule 39 (properties)
+
+
+state 61
+
+   58 prop_id_node: id .
+
+    $default  reduce using rule 58 (prop_id_node)
+
+
+state 62
+
+   40 property: prop_id_node . TEQUAL TQUOTATION prop_val_node TQUOTATION
+   41         | prop_id_node . TEQUAL TQUOTATION TQUOTATION
+
+    TEQUAL  shift, and go to state 66
+
+
+state 63
+
+   11 stmnt: TSPACE start_node text_block stop_node .
+
+    $default  reduce using rule 11 (stmnt)
+
+
+state 64
+
+   22 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION . version_value TQUOTATION STOP_VERSION
+   23        | START_VERSION TSPACE version_id TEQUAL TQUOTATION . version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION . version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    version_value  go to state 67
+    text           go to state 68
+
+
+state 65
+
+   37 properties: property TSPACE . properties
+   38           | property TSPACE .
+
+    TEXT  shift, and go to state 28
+
+    $default  reduce using rule 38 (properties)
+
+    properties    go to state 69
+    property      go to state 60
+    id            go to state 61
+    prop_id_node  go to state 62
+
+
+state 66
+
+   40 property: prop_id_node TEQUAL . TQUOTATION prop_val_node TQUOTATION
+   41         | prop_id_node TEQUAL . TQUOTATION TQUOTATION
+
+    TQUOTATION  shift, and go to state 70
+
+
+state 67
+
+   22 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value . TQUOTATION STOP_VERSION
+   23        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value . TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value . TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TQUOTATION  shift, and go to state 71
+
+
+state 68
+
+   26 version_value: text .
+
+    $default  reduce using rule 26 (version_value)
+
+
+state 69
+
+   37 properties: property TSPACE properties .
+
+    $default  reduce using rule 37 (properties)
+
+
+state 70
+
+   40 property: prop_id_node TEQUAL TQUOTATION . prop_val_node TQUOTATION
+   41         | prop_id_node TEQUAL TQUOTATION . TQUOTATION
+
+    TEXT        shift, and go to state 7
+    SYMBOLS     shift, and go to state 8
+    TEQUAL      shift, and go to state 9
+    TSPACE      shift, and go to state 26
+    TQUOTATION  shift, and go to state 72
+
+    text           go to state 73
+    prop_val_node  go to state 74
+
+
+state 71
+
+   22 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION . STOP_VERSION
+   23        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION . TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION . TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    STOP_VERSION  shift, and go to state 75
+    TSPACE        shift, and go to state 76
+
+
+state 72
+
+   41 property: prop_id_node TEQUAL TQUOTATION TQUOTATION .
+
+    $default  reduce using rule 41 (property)
+
+
+state 73
+
+   59 prop_val_node: text .
+
+    $default  reduce using rule 59 (prop_val_node)
+
+
+state 74
+
+   40 property: prop_id_node TEQUAL TQUOTATION prop_val_node . TQUOTATION
+
+    TQUOTATION  shift, and go to state 77
+
+
+state 75
+
+   22 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION STOP_VERSION .
+
+    $default  reduce using rule 22 (version)
+
+
+state 76
+
+   23 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE . encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE . encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEXT  shift, and go to state 28
+
+    encoding_id  go to state 78
+    id           go to state 79
+
+
+state 77
+
+   40 property: prop_id_node TEQUAL TQUOTATION prop_val_node TQUOTATION .
+
+    $default  reduce using rule 40 (property)
+
+
+state 78
+
+   23 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id . TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id . TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEQUAL  shift, and go to state 80
+
+
+state 79
+
+   27 encoding_id: id .
+
+    $default  reduce using rule 27 (encoding_id)
+
+
+state 80
+
+   23 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL . TQUOTATION encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL . TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TQUOTATION  shift, and go to state 81
+
+
+state 81
+
+   23 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION . encoding_value TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION . encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    encoding_value  go to state 82
+    text            go to state 83
+
+
+state 82
+
+   23 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value . TQUOTATION STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value . TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TQUOTATION  shift, and go to state 84
+
+
+state 83
+
+   28 encoding_value: text .
+
+    $default  reduce using rule 28 (encoding_value)
+
+
+state 84
+
+   23 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION . STOP_VERSION
+   24        | START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION . TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    STOP_VERSION  shift, and go to state 85
+    TSPACE        shift, and go to state 86
+
+
+state 85
+
+   23 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION STOP_VERSION .
+
+    $default  reduce using rule 23 (version)
+
+
+state 86
+
+   24 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE . standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEXT  shift, and go to state 28
+
+    standalone_id  go to state 87
+    id             go to state 88
+
+
+state 87
+
+   24 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id . TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TEQUAL  shift, and go to state 89
+
+
+state 88
+
+   29 standalone_id: id .
+
+    $default  reduce using rule 29 (standalone_id)
+
+
+state 89
+
+   24 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL . TQUOTATION standalone_value TQUOTATION STOP_VERSION
+
+    TQUOTATION  shift, and go to state 90
+
+
+state 90
+
+   24 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION . standalone_value TQUOTATION STOP_VERSION
+
+    TEXT     shift, and go to state 7
+    SYMBOLS  shift, and go to state 8
+    TEQUAL   shift, and go to state 9
+    TSPACE   shift, and go to state 26
+
+    standalone_value  go to state 91
+    text              go to state 92
+
+
+state 91
+
+   24 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value . TQUOTATION STOP_VERSION
+
+    TQUOTATION  shift, and go to state 93
+
+
+state 92
+
+   30 standalone_value: text .
+
+    $default  reduce using rule 30 (standalone_value)
+
+
+state 93
+
+   24 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION . STOP_VERSION
+
+    STOP_VERSION  shift, and go to state 94
+
+
+state 94
+
+   24 version: START_VERSION TSPACE version_id TEQUAL TQUOTATION version_value TQUOTATION TSPACE encoding_id TEQUAL TQUOTATION encoding_value TQUOTATION TSPACE standalone_id TEQUAL TQUOTATION standalone_value TQUOTATION STOP_VERSION .
+
+    $default  reduce using rule 24 (version)

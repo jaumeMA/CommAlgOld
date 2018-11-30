@@ -1,0 +1,194 @@
+.//lexParser.ypp: conflicts: 49 shift/reduce, 12 reduce/reduce
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from .//cXMLreader.h:17,
+                 from .//lexParser.ypp:5:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from cXmlTree.h:17,
+                 from cXmlTree.cpp:1:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from cProperty.h:17,
+                 from cProperty.cpp:1:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from cXMLdoc.h:17,
+                 from cXMLdoc.cpp:1:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from cXMLreader.h:17,
+                 from cXMLreader.cpp:1:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from cXMLdoc.h:17,
+                 from cXMLwriter.h:17,
+                 from cXMLwriter.cpp:1:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^
+In file included from ../System/file/IFile.h:3:0,
+                 from ../System/file/cFileStream.h:5,
+                 from ../System/file/cFileIStream.h:3,
+                 from cXMLwriter.h:18,
+                 from cXMLwriter.cpp:1:
+../YTL/container/cFlagSet.h:11:69: warning: friend declaration ‘constexpr bool flag_set_operators::flag_set_checker(const flag_set_operators::expansor_tag<Enum>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr bool flag_set_checker(const expansor_tag<Enum>&);
+                                                                     ^
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from cDefaultHandler.h:17,
+                 from cDefaultHandler.cpp:1:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^
+In file included from ../Utils/rtti/TypeConversionInstantiator.h:3:0,
+                 from ../Utils/rtti/rtti.h:3,
+                 from ../YTL/smartPtr/detail/ref_ptr.tpp:2,
+                 from ../YTL/smartPtr/refPtr.h:177,
+                 from ../YTL/container/detail/cContainerViewImpl.h:3,
+                 from ../YTL/container/cContainerView.h:3,
+                 from ../YTL/container/cArray.h:28,
+                 from ../YTL/container/cString.h:24,
+                 from cXmlData.h:3,
+                 from cXmlData.cpp:1:
+../Utils/rtti/TypeConversion.h:15:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<T,TT>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:15:83: note: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) 
+../Utils/rtti/TypeConversion.h:16:83: warning: friend declaration ‘constexpr std::ptrdiff_t yame::rtti::detail::_relate_static(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend constexpr std::ptrdiff_t _relate_static(const rtti_conversor_tag<TT,T>&);
+                                                                                   ^
+../Utils/rtti/TypeConversion.h:17:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<T, TT>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<T,TT>&);
+                                                                          ^
+../Utils/rtti/TypeConversion.h:18:74: warning: friend declaration ‘std::ptrdiff_t yame::rtti::detail::_relate_dynamic(const yame::rtti::detail::rtti_conversor_tag<TT, T>&)’ declares a non-template function [-Wnon-template-friend]
+     friend std::ptrdiff_t _relate_dynamic(const rtti_conversor_tag<TT,T>&);
+                                                                          ^

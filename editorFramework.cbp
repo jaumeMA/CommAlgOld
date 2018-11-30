@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="editorFramework" />
+		<Option makefile="/home/marta/workspace/editorFramework/Makefile" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<MakeCommands>
+			<Build command="$make -f $makefile build Mode=$target" />
+			<CompileFile command="$make -f $makefile $file" />
+			<Clean command="$make -f $makefile clean$target" />
+			<DistClean command="$make -f $makefile distclean$target" />
+			<AskRebuildNeeded command="$make -q -f $makefile $target" />
+			<SilentBuild command="$make -s -f $makefile $target" />
+		</MakeCommands>
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/libeditorFramework" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<MakeCommands>
+					<Build command="$make build Mode=$target" />
+					<CompileFile command="make $relfile Mode=$target" />
+					<Clean command="$make clean_all" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make rebuild Mode=$target" />
+					<SilentBuild command="$make build Mode=$target" />
+				</MakeCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/libeditorFramework" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Compiler/scriptParser.l" />
+		<Unit filename="Compiler/scriptParser.ypp" />
+		<Unit filename="Math/cFunction.h" />
+		<Unit filename="Math/cFunctionSpaceTraits.h" />
+		<Unit filename="Math/cMath.h" />
+		<Unit filename="Math/cMathOps.h" />
+		<Unit filename="Math/cMathTemplateHelper.h" />
+		<Unit filename="Math/cMetricSpaceTraits.h" />
+		<Unit filename="Math/cMonomial.h" />
+		<Unit filename="Math/cNumberSpaces.cpp" />
+		<Unit filename="Math/cNumberSpaces.h" />
+		<Unit filename="Math/cNumberTraits.cpp" />
+		<Unit filename="Math/cNumberTraits.h" />
+		<Unit filename="Math/cPolynomial.h" />
+		<Unit filename="Math/cPolynomialAlgebra.h" />
+		<Unit filename="Math/cPolynomialAlgebraTraits.h" />
+		<Unit filename="Math/cPolynomialIterable.h" />
+		<Unit filename="Math/cPolynomialOps.h" />
+		<Unit filename="Math/cPrimeNumbers.h" />
+		<Unit filename="Math/cSet.h" />
+		<Unit filename="Math/cVectorOps.h" />
+		<Unit filename="Math/cVectorOps.tpp" />
+		<Unit filename="Math/cVectorSpace.cpp" />
+		<Unit filename="Math/cVectorSpace.h" />
+		<Unit filename="Math/cVectorSpaceTraits.h" />
+		<Unit filename="Math/detail/cAlgebraImpl.h" />
+		<Unit filename="Math/detail/cAlgebraImpl.tpp" />
+		<Unit filename="Math/detail/cAlgebraTemplateHelper.h" />
+		<Unit filename="Math/detail/cFunction.tpp" />
+		<Unit filename="Math/detail/cFunctionSpaceTemplateHelper.h" />
+		<Unit filename="Math/detail/cFunctionSpaceTraits.tpp" />
+		<Unit filename="Math/detail/cMathDerivativeHelper.h" />
+		<Unit filename="Math/detail/cMathDerivativeHelper.tpp" />
+		<Unit filename="Math/detail/cMathOps.tpp" />
+		<Unit filename="Math/detail/cMetricSpaceImpl.h" />
+		<Unit filename="Math/detail/cMetricSpaceImpl.tpp" />
+		<Unit filename="Math/detail/cMetricSpaceTraits.tpp" />
+		<Unit filename="Math/detail/cMonomial.tpp" />
+		<Unit filename="Math/detail/cNumberSpaces.tpp" />
+		<Unit filename="Math/detail/cNumberTraits.tpp" />
+		<Unit filename="Math/detail/cPolynomial.tpp" />
+		<Unit filename="Math/detail/cPolynomialAlgebra.tpp" />
+		<Unit filename="Math/detail/cPolynomialAlgebraTraits.tpp" />
+		<Unit filename="Math/detail/cPolynomialIterable.tpp" />
+		<Unit filename="Math/detail/cPolynomialOps.tpp" />
+		<Unit filename="Math/detail/cSet.tpp" />
+		<Unit filename="Math/detail/cSetInterface.h" />
+		<Unit filename="Math/detail/cStdMathOps.h" />
+		<Unit filename="Math/detail/cVectorSpace.tpp" />
+		<Unit filename="Math/detail/cVectorSpaceImpl.h" />
+		<Unit filename="Math/detail/cVectorSpaceImpl.tpp" />
+		<Unit filename="Math/detail/cVectorSpaceTraits.tpp" />
+		<Unit filename="System/cException.h" />
+		<Unit filename="System/file/IFile.h" />
+		<Unit filename="System/file/cFile.cpp" />
+		<Unit filename="System/file/cFile.h" />
+		<Unit filename="System/file/cFileDefs.h" />
+		<Unit filename="System/file/cFileIStream.cpp" />
+		<Unit filename="System/file/cFileIStream.h" />
+		<Unit filename="System/file/cFileStream.cpp" />
+		<Unit filename="System/file/cFileStream.h" />
+		<Unit filename="System/file/cMappedFile.cpp" />
+		<Unit filename="System/file/cMappedFile.h" />
+		<Unit filename="System/memory/IMemoryProvider.h" />
+		<Unit filename="System/memory/cBuddyAllocator.cpp" />
+		<Unit filename="System/memory/cBuddyAllocator.h" />
+		<Unit filename="System/memory/cMemoryMgr.cpp" />
+		<Unit filename="System/memory/cMemoryMgr.h" />
+		<Unit filename="System/memory/cMemoryPool.cpp" />
+		<Unit filename="System/memory/cMemoryPool.h" />
+		<Unit filename="System/memory/cMemoryTracker.cpp" />
+		<Unit filename="System/memory/cMemoryTracker.h" />
+		<Unit filename="System/memory/cSystemAllocator.cpp" />
+		<Unit filename="System/memory/cSystemAllocator.h" />
+		<Unit filename="System/memory/detail/cMemoryMgr.tpp" />
+		<Unit filename="System/memory/detail/cMemoryPool.tpp" />
+		<Unit filename="System/rtti/TypeInfo.h" />
+		<Unit filename="System/rtti/rttiDefs.h" />
+		<Unit filename="System/thread/cThread.cpp" />
+		<Unit filename="System/thread/cThread.h" />
+		<Unit filename="System/time/cTime.h" />
+		<Unit filename="Utils/cBitUtilities.h" />
+		<Unit filename="Utils/cInterfaceAccess.h" />
+		<Unit filename="Utils/cLog.cpp" />
+		<Unit filename="Utils/cLog.h" />
+		<Unit filename="Utils/cMacroHelper.h" />
+		<Unit filename="Utils/cResult.h" />
+		<Unit filename="Utils/engine.cpp" />
+		<Unit filename="Utils/engine.h" />
+		<Unit filename="Utils/engineTypes.h" />
+		<Unit filename="Utils/rtti.h" />
+		<Unit filename="Utils/rtti/TypeAccess.h" />
+		<Unit filename="Utils/rtti/TypeConversion.h" />
+		<Unit filename="Utils/rtti/TypeConversionInstantiator.h" />
+		<Unit filename="Utils/rtti/TypeInfo.cpp" />
+		<Unit filename="Utils/rtti/TypeInfo.h" />
+		<Unit filename="Utils/rtti/TypeTable.cpp" />
+		<Unit filename="Utils/rtti/TypeTable.h" />
+		<Unit filename="Utils/rtti/detail/TypeAccess.tpp" />
+		<Unit filename="Utils/rtti/detail/TypeTable.tpp" />
+		<Unit filename="Utils/rtti/rtti.h" />
+		<Unit filename="Utils/rtti/rttiDefs.h" />
+		<Unit filename="Utils/singleton.h" />
+		<Unit filename="XmlParser/cDefaultHandler.cpp" />
+		<Unit filename="XmlParser/cDefaultHandler.h" />
+		<Unit filename="XmlParser/cProperty.cpp" />
+		<Unit filename="XmlParser/cProperty.h" />
+		<Unit filename="XmlParser/cXMLdoc.cpp" />
+		<Unit filename="XmlParser/cXMLdoc.h" />
+		<Unit filename="XmlParser/cXMLreader.cpp" />
+		<Unit filename="XmlParser/cXMLreader.h" />
+		<Unit filename="XmlParser/cXMLwriter.cpp" />
+		<Unit filename="XmlParser/cXMLwriter.h" />
+		<Unit filename="XmlParser/cXmlData.cpp" />
+		<Unit filename="XmlParser/cXmlData.h" />
+		<Unit filename="XmlParser/cXmlIterable.h" />
+		<Unit filename="XmlParser/cXmlTree.cpp" />
+		<Unit filename="XmlParser/cXmlTree.h" />
+		<Unit filename="XmlParser/detail/cXmlIterable.tpp" />
+		<Unit filename="XmlParser/detail/cXmlTree.tpp" />
+		<Unit filename="XmlParser/lexParser.l" />
+		<Unit filename="XmlParser/lexParser.tab.cpp" />
+		<Unit filename="XmlParser/lexParser.tab.hpp" />
+		<Unit filename="XmlParser/lexParser.ypp" />
+		<Unit filename="XmlParser/xmlParserHelper.cpp" />
+		<Unit filename="YTL/container/IForest.h" />
+		<Unit filename="YTL/container/cAVLtree.h" />
+		<Unit filename="YTL/container/cAlgorithm.h" />
+		<Unit filename="YTL/container/cArray.h" />
+		<Unit filename="YTL/container/cBlockSet.h" />
+		<Unit filename="YTL/container/cContainerView.h" />
+		<Unit filename="YTL/container/cCustomContainer.h" />
+		<Unit filename="YTL/container/cFlagSet.h" />
+		<Unit filename="YTL/container/cInputStream.h" />
+		<Unit filename="YTL/container/cIterable.h" />
+		<Unit filename="YTL/container/cIterableBase.h" />
+		<Unit filename="YTL/container/cIterableImpl.cpp" />
+		<Unit filename="YTL/container/cIterator.h" />
+		<Unit filename="YTL/container/cMap.h" />
+		<Unit filename="YTL/container/cMultiMap.h" />
+		<Unit filename="YTL/container/cMultiMapBalancer.h" />
+		<Unit filename="YTL/container/cMultiMapIterable.h" />
+		<Unit filename="YTL/container/cOutputStream.h" />
+		<Unit filename="YTL/container/cPair.h" />
+		<Unit filename="YTL/container/cParameterPack.h" />
+		<Unit filename="YTL/container/cQueue.h" />
+		<Unit filename="YTL/container/cRecursiveAVLTree.h" />
+		<Unit filename="YTL/container/cRecursiveMap.h" />
+		<Unit filename="YTL/container/cRope.h" />
+		<Unit filename="YTL/container/cStack.h" />
+		<Unit filename="YTL/container/cStream.h" />
+		<Unit filename="YTL/container/cString.h" />
+		<Unit filename="YTL/container/cTreeBalancer.h" />
+		<Unit filename="YTL/container/cTrie.h" />
+		<Unit filename="YTL/container/cTupla.h" />
+		<Unit filename="YTL/container/cUnorderedMap.h" />
+		<Unit filename="YTL/container/cWritableContainer.h" />
+		<Unit filename="YTL/container/detail/cAVLtree.tpp" />
+		<Unit filename="YTL/container/detail/cArray.tpp" />
+		<Unit filename="YTL/container/detail/cBlockSet.tpp" />
+		<Unit filename="YTL/container/detail/cContainerOps.h" />
+		<Unit filename="YTL/container/detail/cContainerOps.tpp" />
+		<Unit filename="YTL/container/detail/cContainerViewImpl.h" />
+		<Unit filename="YTL/container/detail/cContainerViewImpl.tpp" />
+		<Unit filename="YTL/container/detail/cFlagSet.tpp" />
+		<Unit filename="YTL/container/detail/cInputStream.tpp" />
+		<Unit filename="YTL/container/detail/cIterable.tpp" />
+		<Unit filename="YTL/container/detail/cIterableBase.tpp" />
+		<Unit filename="YTL/container/detail/cIterableImpl.h" />
+		<Unit filename="YTL/container/detail/cIterableImpl.tpp" />
+		<Unit filename="YTL/container/detail/cIterableImplBackEnd.h" />
+		<Unit filename="YTL/container/detail/cIterableImplBackEnd.tpp" />
+		<Unit filename="YTL/container/detail/cIterableTemplateHelper.h" />
+		<Unit filename="YTL/container/detail/cIterator.tpp" />
+		<Unit filename="YTL/container/detail/cIteratorTag.h" />
+		<Unit filename="YTL/container/detail/cMap.tpp" />
+		<Unit filename="YTL/container/detail/cMultiMap.tpp" />
+		<Unit filename="YTL/container/detail/cMultiMapBalancer.tpp" />
+		<Unit filename="YTL/container/detail/cMultiMapIterable.tpp" />
+		<Unit filename="YTL/container/detail/cMultiMapOps.h" />
+		<Unit filename="YTL/container/detail/cMultiMapOps.tpp" />
+		<Unit filename="YTL/container/detail/cOutputStream.tpp" />
+		<Unit filename="YTL/container/detail/cPair.tpp" />
+		<Unit filename="YTL/container/detail/cParameterPack.tpp" />
+		<Unit filename="YTL/container/detail/cQueue.tpp" />
+		<Unit filename="YTL/container/detail/cRope.tpp" />
+		<Unit filename="YTL/container/detail/cStack.tpp" />
+		<Unit filename="YTL/container/detail/cStream.tpp" />
+		<Unit filename="YTL/container/detail/cString.tpp" />
+		<Unit filename="YTL/container/detail/cTreeBalancer.tpp" />
+		<Unit filename="YTL/container/detail/cTreeWalker.tpp" />
+		<Unit filename="YTL/container/detail/cTrie.tpp" />
+		<Unit filename="YTL/container/detail/cTupla.tpp" />
+		<Unit filename="YTL/container/detail/cTupla_impl.h" />
+		<Unit filename="YTL/container/detail/cTupla_impl.tpp" />
+		<Unit filename="YTL/container/detail/cTupla_interface.h" />
+		<Unit filename="YTL/container/detail/cUnorderedMap.tpp" />
+		<Unit filename="YTL/container/detail/cWritableContainer.tpp" />
+		<Unit filename="YTL/functional/cAgnosticCallable.h" />
+		<Unit filename="YTL/functional/cComposedCallable.h" />
+		<Unit filename="YTL/functional/cFunction.cpp" />
+		<Unit filename="YTL/functional/cFunction.h" />
+		<Unit filename="YTL/functional/cFunctionOps.h" />
+		<Unit filename="YTL/functional/cFunctionStorage.h" />
+		<Unit filename="YTL/functional/cPassByValueFunctor.h" />
+		<Unit filename="YTL/functional/detail/cAgnosticCallable.tpp" />
+		<Unit filename="YTL/functional/detail/cComposedCallable.tpp" />
+		<Unit filename="YTL/functional/detail/cFunction.tpp" />
+		<Unit filename="YTL/functional/detail/cFunctionImpl.h" />
+		<Unit filename="YTL/functional/detail/cFunctionImpl.tpp" />
+		<Unit filename="YTL/functional/detail/cFunctionOps.tpp" />
+		<Unit filename="YTL/functional/detail/cFunctionParameterPack.h" />
+		<Unit filename="YTL/functional/detail/cFunctionParameterPack.tpp" />
+		<Unit filename="YTL/functional/detail/cFunctionStorage.tpp" />
+		<Unit filename="YTL/functional/detail/cPassByValueFunctor.tpp" />
+		<Unit filename="YTL/mpl/cAccessBase.h" />
+		<Unit filename="YTL/mpl/cFunctionTemplateHelper.h" />
+		<Unit filename="YTL/mpl/cIterableTemplateHelper.h" />
+		<Unit filename="YTL/mpl/cOptionalTemplateHelper.h" />
+		<Unit filename="YTL/mpl/cParameterPackHelper.h" />
+		<Unit filename="YTL/mpl/cParameterPackTemplateHelper.h" />
+		<Unit filename="YTL/mpl/cStaticCounter.h" />
+		<Unit filename="YTL/mpl/cTemplateHelper.cpp" />
+		<Unit filename="YTL/mpl/cTemplateHelper.h" />
+		<Unit filename="YTL/mpl/cVariantTemplateHelper.h" />
+		<Unit filename="YTL/signal/cAsyncConnection.cpp" />
+		<Unit filename="YTL/signal/cAsyncConnection.h" />
+		<Unit filename="YTL/signal/cAsyncSignal.h" />
+		<Unit filename="YTL/signal/cConnection.cpp" />
+		<Unit filename="YTL/signal/cConnection.h" />
+		<Unit filename="YTL/signal/cMessageQueue.h" />
+		<Unit filename="YTL/signal/cObserver.h" />
+		<Unit filename="YTL/signal/cSignal.h" />
+		<Unit filename="YTL/signal/cSignalFunctor.cpp" />
+		<Unit filename="YTL/signal/cSignalFunctor.h" />
+		<Unit filename="YTL/signal/detail/cAsyncSignal.tpp" />
+		<Unit filename="YTL/signal/detail/cMessageQueue.tpp" />
+		<Unit filename="YTL/signal/detail/cObserver.tpp" />
+		<Unit filename="YTL/signal/detail/cSignal.tpp" />
+		<Unit filename="YTL/signal/detail/cSignalFunctor.tpp" />
+		<Unit filename="YTL/types/embedded_type/detail/embedded_type.tpp" />
+		<Unit filename="YTL/types/embedded_type/embedded_type.h" />
+		<Unit filename="YTL/types/optional/detail/optional.tpp" />
+		<Unit filename="YTL/types/optional/optional.h" />
+		<Unit filename="YTL/types/smartPtr/detail/enable_ref_from_this.tpp" />
+		<Unit filename="YTL/types/smartPtr/detail/lent_ptr.tpp" />
+		<Unit filename="YTL/types/smartPtr/detail/ptr_utils.tpp" />
+		<Unit filename="YTL/types/smartPtr/detail/shared_ptr.tpp" />
+		<Unit filename="YTL/types/smartPtr/detail/unique_ptr.tpp" />
+		<Unit filename="YTL/types/smartPtr/enable_ref_from_this.cpp" />
+		<Unit filename="YTL/types/smartPtr/enable_ref_from_this.h" />
+		<Unit filename="YTL/types/smartPtr/lent_ptr.h" />
+		<Unit filename="YTL/types/smartPtr/ptr_utils.h" />
+		<Unit filename="YTL/types/smartPtr/reference_counter.cpp" />
+		<Unit filename="YTL/types/smartPtr/reference_counter.h" />
+		<Unit filename="YTL/types/smartPtr/shared_ptr.h" />
+		<Unit filename="YTL/types/smartPtr/smart_deleter.h" />
+		<Unit filename="YTL/types/smartPtr/smart_ptr.h" />
+		<Unit filename="YTL/types/smartPtr/unique_ptr.h" />
+		<Unit filename="YTL/types/taggedPtr/detail/tagged_pointer.tpp" />
+		<Unit filename="YTL/types/taggedPtr/tagged_pointer.h" />
+		<Unit filename="YTL/types/variant/detail/builtin_visitors.h" />
+		<Unit filename="YTL/types/variant/detail/builtin_visitors.tpp" />
+		<Unit filename="YTL/types/variant/detail/variant.tpp" />
+		<Unit filename="YTL/types/variant/detail/variant_impl.h" />
+		<Unit filename="YTL/types/variant/detail/variant_impl.tpp" />
+		<Unit filename="YTL/types/variant/detail/variant_interface.h" />
+		<Unit filename="YTL/types/variant/detail/variant_interface.tpp" />
+		<Unit filename="YTL/types/variant/detail/visitor_invoker.h" />
+		<Unit filename="YTL/types/variant/detail/visitor_invoker.tpp" />
+		<Unit filename="YTL/types/variant/static_visitor.h" />
+		<Unit filename="YTL/types/variant/variant.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

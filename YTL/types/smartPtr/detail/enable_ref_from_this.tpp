@@ -1,0 +1,8 @@
+
+namespace yame
+{
+namespace ytl
+{
+
+}
+}
